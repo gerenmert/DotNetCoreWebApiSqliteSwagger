@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore;
+using Microsoft.OpenApi.Models;
 
 namespace DotNetCoreWebApiSqliteSwagger
 {
@@ -26,6 +28,7 @@ namespace DotNetCoreWebApiSqliteSwagger
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo{Version = "v1", Title = "Api"}));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +40,8 @@ namespace DotNetCoreWebApiSqliteSwagger
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Api"));
 
             app.UseRouting();
 
