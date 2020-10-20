@@ -11,39 +11,49 @@ namespace DotNetCoreWebApiSqliteSwagger.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public UserController()
+        private UserContext _userContext;
+        public UserController(UserContext userContext)
         {
-            
+            _userContext = userContext;
         }
 
         [HttpGet("")]
-        public ActionResult<IEnumerable<string>> Getstrings()
+        public ActionResult<List<User>> Getstrings()
         {
-            return new List<string> { };
+            return _userContext.Users.ToList();
         }
 
         [HttpGet("{id}")]
         public ActionResult<User> GetstringById(int id)
         {
-            return null;
+            return _userContext.Users.FirstOrDefault(user => user.Id == id);
         }
 
         [HttpPost("")]
-        public void Poststring(User user)
+        public User Poststring(User user)
         {
-
+            _userContext.Users.Add(user);
+            _userContext.SaveChanges();
+            return user;
         }
 
         [HttpPut("{id}")]
-        public void Putstring(int id, User user)
+        public ActionResult<User> Putstring(int id, User user)
         {
-
+            var oldUser = _userContext.Users.FirstOrDefault(user => user.Id == id);
+            oldUser.Name = user.Name;
+            oldUser.Email = user.Email;
+            oldUser.Password = user.Password;
+            _userContext.SaveChanges();
+            return oldUser;
         }
 
         [HttpDelete("{id}")]
-        public void DeletestringById(int id)
+        public ActionResult<int> DeletestringById(int id)
         {
-           
+           _userContext.Users.Remove(_userContext.Users.FirstOrDefault(User => User.Id == id));
+           _userContext.SaveChanges();
+           return id;
         }
     }
 }
