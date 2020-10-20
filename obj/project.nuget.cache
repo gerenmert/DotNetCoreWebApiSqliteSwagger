@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "f+ds+5Zo6sWUg/Ix73k2gkyyfymidv+oaukUv1QkKOLAC3QJB4gsw/WDz8BzIY2rZ9khxx/636tTXzlgumSo4Q==",
+  "dgSpecHash": "ZijNTuDBsXy3oQEzXcaToBzm2jvam8xCba3KTC9eaZgkshuVxXUNWtFUe+/WQ7Djv4R52JxZScLuzk52ffSkaA==",
   "success": true,
   "projectFilePath": "/Users/mertgeren/Documents/Projects/Examples/DotNetCore/DotNetCoreWebApiSqliteSwagger/DotNetCoreWebApiSqliteSwagger.csproj",
   "expectedPackageFiles": [

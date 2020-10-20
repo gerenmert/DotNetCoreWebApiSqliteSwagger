@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using DotNetCoreWebApiSqliteSwagger.Models;
 
 namespace DotNetCoreWebApiSqliteSwagger
 {
@@ -29,6 +31,8 @@ namespace DotNetCoreWebApiSqliteSwagger
         {
             services.AddControllers();
             services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo{Version = "v1", Title = "Api"}));
+            services.AddDbContext<UserContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
